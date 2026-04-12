@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Project filter tabs
     // ----------------------------------------
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
+    // Using projectCards defined at line 102
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
