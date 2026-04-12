@@ -50,6 +50,26 @@ document.addEventListener('DOMContentLoaded', function () {
             navbar.classList.remove('scrolled');
         }
         lastScroll = currentScroll;
+
+        // ScrollSpy logic
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-list .nav-link');
+        
+        let currentSectionId = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= (sectionTop - 200)) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSectionId}` || (!currentSectionId && link.getAttribute('href') === '#hero')) {
+                link.classList.add('active');
+            }
+        });
     });
 
     // ----------------------------------------
