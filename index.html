@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Atharv's portfolio — a creative developer building stunning digital experiences.">
+    <meta property="og:title" content="Atharv | Creative Developer & Designer">
+    <meta property="og:description" content="Immersive portfolio showcasing high-performance web experiences and creative digital designs.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Atharv | Creative Developer">
+    <meta name="twitter:description" content="Building the future of the web, one pixel at a time.">
+    
+    <title>Atharv | Creative Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="static/style.css">
+    <script>
+        // Set scroll restoration to manual and disable smooth scroll as early as possible
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        document.documentElement.style.scrollBehavior = 'auto';
+        window.scrollTo(0, 0);
+    </script>
+</head>
+
+
+<body style="visibility: hidden; opacity: 0; transition: opacity 0.5s ease-in;">
+    <script>
+        // High-priority immediate scroll reset
+        window.scrollTo(0, 0);
+    </script>
+    <!-- Animated background particles -->
+
+
+    <div class="bg-particles" id="bgParticles"></div>
+
+    <!-- Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>Atharv<span class="logo-bracket">/&gt;</span>
+            </a>
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="#hero" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="main-content">
+        
+<!-- Hero Section -->
+<section class="hero" id="hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-badge animate-fade-up">
+                <span class="badge-dot"></span>
+                Available for freelance work
+            </div>
+            <h1 class="hero-title animate-fade-up delay-1">
+                Hi, I'm <span class="gradient-text">Atharv</span>
+            </h1>
+            <p class="hero-subtitle animate-fade-up delay-2">
+                Creative Developer &amp; Designer
+            </p>
+            <p class="hero-description animate-fade-up delay-3">
+                I craft beautiful, high-performance digital experiences that bring ideas to life. 
+                Specializing in modern web development with a keen eye for design and user experience.
+            </p>
+            <div class="hero-cta animate-fade-up delay-4">
+                <a href="#projects" class="btn btn-primary">
+                    <span>View My Work</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <span>Get in Touch</span>
+                </a>
+            </div>
+            <div class="hero-stats animate-fade-up delay-5">
+                <div class="stat-item">
+                    <span class="stat-number" id="dynamic-project-count" data-count="0">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" id="dynamic-tech-count" data-count="0">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Technologies</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="12">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual animate-fade-up delay-2">
+            <div class="hero-card">
+                <div class="card-header">
+                    <div class="card-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="card-title">portfolio.js</span>
+                </div>
+                <div class="card-body">
+                    <pre><code><span class="code-keyword">const</span> <span class="code-var">developer</span> = {
+  <span class="code-key">name</span>: <span class="code-string">"Atharv"</span>,
+  <span class="code-key">skills</span>: [<span class="code-string">"JavaScript"</span>, <span class="code-string">"Python"</span>, 
+           <span class="code-string">"React"</span>, <span class="code-string">"Flask"</span>],
+  <span class="code-key">passion</span>: <span class="code-string">"Building amazing UIs"</span>,
+  <span class="code-key">available</span>: <span class="code-bool">true</span>
+};
+
+<span class="code-keyword">export default</span> developer;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator animate-fade-up delay-5">
+        <div class="mouse">
+            <div class="mouse-wheel"></div>
+        </div>
+        <span>Scroll down</span>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="section about-section" id="about">
+    <div class="section-container">
+        <div class="about-grid">
+            <div class="about-image-wrapper">
+                <div class="about-image-card">
+                    <div class="about-avatar">
+                        <div class="avatar-placeholder">
+                            <i class="fas fa-user-astronaut"></i>
+                        </div>
+                    </div>
+                    <div class="about-image-decoration"></div>
+                </div>
+            </div>
+            <div class="about-content">
+                <h2 class="about-heading">I'm a <span class="gradient-text">creative developer</span> who loves building
+                    things for the web</h2>
+                <p>I'm a passionate developer with a strong foundation in both frontend and backend technologies. I
+                    believe in writing clean, efficient code and creating user experiences that are both beautiful and
+                    functional.</p>
+                <p>When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects,
+                    or learning about the latest trends in design and development.</p>
+                <div class="about-details">
+                    <div class="detail-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <span class="detail-label">Name</span>
+                            <span class="detail-value">Atharv Chaudhari</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div>
+                            <span class="detail-label">Age</span>
+                            <span class="detail-value">19 Years Old</span> 
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <span class="detail-label">Location</span>
+                            <span class="detail-value">Ahmedabad, India</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <span class="detail-label">Email</span>
+                            <span class="detail-value">atharv9727@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div>
+                            <span class="detail-label">Education</span>
+                            <span class="detail-value">Computer Science</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-briefcase"></i>
+                        <div>
+                            <span class="detail-label">Experience</span>
+                            <span class="detail-value">1+ Years</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="#contact" class="btn btn-primary">
+                    <span>Let's Work Together</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Section (Nested in About) -->
+    <div class="section-container" style="margin-top: 6rem;">
+        <div class="section-header">
+            <span class="section-tag">Tech Stack</span>
+            <h2 class="section-title">Skills & <span class="gradient-text">Technologies</span></h2>
+            <p class="section-subtitle">Tools and technologies I work with daily</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                <span class="skill-name">HTML5</span>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--fill-width: 95%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                <span class="skill-name">CSS3</span>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--fill-width: 90%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-ai"></i></div>
+                <span class="skill-name">AI technologies</span>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--fill-width: 85%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-python"></i></div>
+                <span class="skill-name">Python</span>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--fill-width: 88%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-react"></i></div>
+                <span class="skill-name">React</span>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--fill-width: 80%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fas fa-flask"></i></div>
+                <span class="skill-name">Flask</span>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--fill-width: 85%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                <span class="skill-name">Git</span>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--fill-width: 82%;"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fab fa-figma"></i></div>
+                <span class="skill-name">Figma</span>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="--fill-width: 75%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience Timeline (Nested in About) -->
+    <div class="section-container" style="margin-top: 6rem;">
+        <div class="section-header">
+            <span class="section-tag">Journey</span>
+            <h2 class="section-title">My <span class="gradient-text">Experience</span></h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2024 - Present</span>
+                    <h3>web developer</h3>
+                    <p>Building custom web solutions for clients across various industries. Focused on creating
+                        performant, beautiful applications.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2023 - 2024</span>
+                    <h3>Junior Web Developer</h3>
+                    <p>Worked on multiple full-stack projects, collaborating with design and backend teams to deliver
+                        exceptional digital products.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2022 - 2023</span>
+                    <h3>Started Learning</h3>
+                    <p>Began my coding journey, learning HTML, CSS, JavaScript, and Python. Built my first portfolio and
+                        open-source projects.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="section services-section" id="services">
+    <div class="section-container">
+        <div class="section-header">
+            <span class="section-tag">What I Do</span>
+            <h2 class="section-title">Services & <span class="gradient-text">Expertise</span></h2>
+            <p class="section-subtitle">Turning complex problems into elegant solutions</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" data-tilt>
+                <div class="service-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Web Development</h3>
+                <p>Building responsive, performant web applications using modern frameworks and best practices.</p>
+                <div class="service-tags">
+                    <span>React</span><span>Flask</span><span>Node.js</span>
+                </div>
+            </div>
+            <div class="service-card" data-tilt>
+                <div class="service-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3>UI/UX Design</h3>
+                <p>Crafting intuitive, beautiful interfaces that delight users and drive engagement.</p>
+                <div class="service-tags">
+                    <span>Figma</span><span>Prototyping</span><span>Design Systems</span>
+                </div>
+            </div>
+            <div class="service-card" data-tilt>
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Responsive Design</h3>
+                <p>Ensuring seamless experiences across all devices, from mobile to ultra-wide displays.</p>
+                <div class="service-tags">
+                    <span>Mobile First</span><span>CSS Grid</span><span>Flexbox</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Full Projects Section -->
+<section class="section projects-section" id="projects">
+    <div class="section-container">
+        <div class="section-header">
+            <span class="section-tag">Portfolio</span>
+            <h2 class="section-title">My <span class="gradient-text">Projects</span> <span id="project-count-badge" class="count-badge"></span></h2>
+            <p class="section-subtitle">A curated collection of my work</p>
+        </div>
+        <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web Apps</button>
+            <button class="filter-btn" data-filter="ui">UI/UX</button>
+            <button class="filter-btn" data-filter="other">Other</button>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card" data-category="web">
+                <div class="project-image" style="background: linear-gradient(135deg, #00f0ff 0%, #3a0ca3 100%);">
+                    <div class="project-overlay">
+                        <div class="project-actions">
+                            <a href="#" class="project-action-btn" aria-label="View Live"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-action-btn" aria-label="View Code"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>E-Commerce Platform</h3>
+                    <p>A full-stack e-commerce solution with real-time inventory management, payment processing.</p>
+                    <div class="project-tech">
+                        <span>React</span><span>Node.js</span><span>MongoDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web">
+                <div class="project-image" style="background: linear-gradient(135deg, #9d4edd 0%, #10002b 100%);">
+                    <div class="project-overlay">
+                        <div class="project-actions">
+                            <a href="#" class="project-action-btn" aria-label="View Live"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-action-btn" aria-label="View Code"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Analytics Dashboard</h3>
+                    <p>Real-time data visualization dashboard with interactive charts, filtering, and exports.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>D3.js</span><span>Flask</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="ui">
+                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <div class="project-overlay">
+                        <div class="project-actions">
+                            <a href="#" class="project-action-btn" aria-label="View Live"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-action-btn" aria-label="View Code"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Weather App</h3>
+                    <p>Beautiful weather application with location-based forecasts, animated backgrounds.</p>
+                    <div class="project-tech">
+                        <span>JavaScript</span><span>OpenWeather</span><span>CSS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web">
+                <div class="project-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <div class="project-overlay">
+                        <div class="project-actions">
+                            <a href="#" class="project-action-btn" aria-label="View Live"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-action-btn" aria-label="View Code"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Task Management App</h3>
+                    <p>Collaborative task manager with drag-and-drop boards, real-time sync, and workspaces.</p>
+                    <div class="project-tech">
+                        <span>React</span><span>Firebase</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="other">
+                <div class="project-image" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                    <div class="project-overlay">
+                        <div class="project-actions">
+                            <a href="#" class="project-action-btn" aria-label="View Live"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-action-btn" aria-label="View Code"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>CLI Productivity Tool</h3>
+                    <p>A command-line tool for automating daily developer workflows including git, deployments.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>Click</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="section contact-section" id="contact">
+    <div class="section-container">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>Let's talk about <span class="gradient-text">everything</span></h2>
+                <p>Feel free to reach out to me. I'm always open to discussing new projects, creative ideas, or opportunities.</p>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-method-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-method-info">
+                            <span class="contact-method-label">Email</span>
+                            <a href="mailto:atharv9727@gmail.com" class="contact-method-value">atharv9727@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon"><i class="fab fa-linkedin-in"></i></div>
+                        <div class="contact-method-info">
+                            <span class="contact-method-label">LinkedIn</span>
+                            <a href="https://linkedin.com/in/atharv" class="contact-method-value" target="_blank" rel="noopener noreferrer">linkedin.com/in/atharv</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon"><i class="fab fa-github"></i></div>
+                        <div class="contact-method-info">
+                            <span class="contact-method-label">GitHub</span>
+                            <a href="https://github.com/atharvchaudhari76-blip" class="contact-method-value" target="_blank" rel="noopener noreferrer">github.com/atharvchaudhari76-blip</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Your Email</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tell me about your project..." rows="5" required></textarea>
+                        <div class="form-line"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-full">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="footer-logo">
+                        <span class="logo-bracket">&lt;</span>Atharv<span class="logo-bracket">/&gt;</span>
+                    </a>
+                    <p class="footer-tagline">Crafting digital experiences with passion and precision.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="https://github.com/atharvchaudhari76-blip" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/atharv" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://twitter.com/atharv" class="social-icon" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-x-twitter"></i></a>
+                        <a href="mailto:atharv9727@gmail.com" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Atharv. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="static/script.js?v=1.1"></script>
+</body>
+</html>
