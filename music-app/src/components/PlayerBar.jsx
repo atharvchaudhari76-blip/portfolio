@@ -64,20 +64,20 @@ const PlayerBar = () => {
         />
       )}
 
-      <div style={{ display: 'flex', alignItems: 'center', width: '30%', gap: '16px' }}>
+      <div className="player-section-info">
         <img 
           src={currentTrack.thumbnail} 
           alt={currentTrack.title} 
-          style={{ width: '56px', height: '56px', borderRadius: '8px', objectFit: 'cover' }}
+          style={{ width: '48px', height: '48px', borderRadius: '8px', objectFit: 'cover' }}
         />
         <div style={{ overflow: 'hidden' }}>
-          <div style={{ fontWeight: 600, fontSize: '14px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          <div style={{ fontWeight: 600, fontSize: '13px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             {currentTrack.title}
           </div>
-          <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{currentTrack.artist}</div>
+          <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{currentTrack.artist}</div>
         </div>
         <button 
-          className="btn" 
+          className="btn hide-mobile" 
           onClick={() => isLiked ? removeFromLibrary(currentTrack.id) : addToLibrary(currentTrack)}
           style={{ color: isLiked ? 'var(--accent-primary)' : 'var(--text-muted)' }}
         >
@@ -85,14 +85,12 @@ const PlayerBar = () => {
         </button>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, gap: '8px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          <button className="btn"><SkipBack size={20} /></button>
+      <div className="player-section-controls">
+        <div className="playback-controls">
+          <button className="btn" style={{ padding: '8px' }}><SkipBack size={20} /></button>
           <button 
-            className="btn" 
-            onClick={() => {
-              togglePlay();
-            }}
+            className="btn play-btn" 
+            onClick={() => togglePlay()}
             style={{ background: 'white', color: 'black', padding: '10px', borderRadius: '50%' }}
           >
             {isPlaying ? (
@@ -101,11 +99,11 @@ const PlayerBar = () => {
               <Play size={24} fill="black" style={{ marginLeft: '2px' }} />
             )}
           </button>
-          <button className="btn"><SkipForward size={20} /></button>
+          <button className="btn" style={{ padding: '8px' }}><SkipForward size={20} /></button>
         </div>
         
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', width: '100%', maxWidth: '600px' }}>
-          <span style={{ fontSize: '11px', color: 'var(--text-muted)', width: '40px' }}>{formatTime(played)}</span>
+        <div className="progress-container hide-mobile">
+          <span style={{ fontSize: '11px', color: 'var(--text-muted)', width: '35px' }}>{formatTime(played)}</span>
           <input 
             type="range" 
             min={0} 
@@ -121,11 +119,11 @@ const PlayerBar = () => {
               cursor: 'pointer'
             }}
           />
-          <span style={{ fontSize: '11px', color: 'var(--text-muted)', width: '40px' }}>{formatTime(duration || currentTrack.duration)}</span>
+          <span style={{ fontSize: '11px', color: 'var(--text-muted)', width: '35px' }}>{formatTime(duration || currentTrack.duration)}</span>
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', width: '30%', justifyContent: 'flex-end', gap: '16px' }}>
+      <div className="player-section-actions hide-mobile">
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Volume2 size={18} color="var(--text-muted)" />
           <input 

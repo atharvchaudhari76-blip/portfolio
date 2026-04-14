@@ -91,43 +91,57 @@ body {
   margin: 0 auto;
 }
 
-.player-wrapper {
+.player-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 100;
-}
-
-.bottom-nav {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background: rgba(15, 15, 18, 0.8);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  height: var(--player-height);
+  background: rgba(15, 15, 18, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid var(--border-glass);
-  z-index: 110;
-  padding: 0 16px;
-  justify-content: space-around;
+  display: flex;
   align-items: center;
+  padding: 0 24px;
+  z-index: 100;
+  justify-content: space-between;
 }
 
-.nav-item {
+.player-section-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 30%;
+}
+
+.player-section-controls {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 10px;
-  font-weight: 500;
-  padding: 8px;
-  flex: 1;
+  gap: 8px;
+  min-width: 140px;
+}
+
+.player-section-actions {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.playback-controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 600px;
 }
 
 .nav-item.active {
@@ -166,7 +180,7 @@ body {
   }
 
   .main-content {
-    padding: 20px;
+    padding: 16px;
     padding-bottom: calc(var(--player-height) + 80px);
   }
 
@@ -176,20 +190,37 @@ body {
 
   .player-bar {
     bottom: 64px;
-    height: 70px;
+    height: 80px;
     padding: 0 16px;
+    gap: 12px;
   }
 
-  /* Hide non-essential player controls on mobile */
-  .player-bar input[type="range"],
-  .player-bar .volume-control,
-  .player-bar .time-display {
+  .player-section-info {
+    width: 55%;
+  }
+  
+  .player-section-controls {
+    width: 45%;
+    flex: none;
+    align-items: flex-end;
+    gap: 0;
+  }
+
+  .playback-controls {
+    gap: 8px;
+  }
+
+  .play-btn {
+    padding: 8px !important;
+  }
+
+  .hide-mobile {
     display: none !important;
   }
 
   .song-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
   }
 }
 
