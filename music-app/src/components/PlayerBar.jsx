@@ -1,24 +1,45 @@
 import React, { useRef, useState, useEffect } from 'react';
-import ReactPlayer from 'react-player';
-import { Play, Pause, SkipForward, SkipBack, Volume2, Maximize2, Heart, ExternalLink, Loader2 } from 'lucide-react';
+import { Play, Pause, SkipForward, SkipBack, Volume2, Heart } from 'lucide-react';
 import { useAudio } from '../context/AudioContext';
-import { searchMusic } from '../services/musicService';
 
 const PlayerBar = () => {
-  const { currentTrack, isPlaying, togglePlay, volume, setVolume, library, addToLibrary, removeFromLibrary } = useAudio();
+  const { currentTrack, isPlaying, togglePlay, volume, setVolume, library, addToLibrary, removeFromLibrary, setIsPlaying } = useAudio();
   const [played, setPlayed] = useState(0);
   const [duration, setDuration] = useState(0);
-  const playerRef = useRef(null);
+  const audioRef = useRef(null);
 
   const isLiked = currentTrack && library.find(t => t.id === currentTrack.id);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.play().catch(err => {
+          console.error("Audio failed to play:", err);
+          setIsPlaying(false);
+          alert("Browser blocked auto-play or stream is temporarily unavailable.");
+        });
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [isPlaying, currentTrack?.streamUrl]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
 
   const handleSeek = (e) => {
     const time = parseFloat(e.target.value);
     setPlayed(time);
-    playerRef.current.seekTo(time);
+    if (audioRef.current) {
+      audioRef.current.currentTime = time;
+    }
   };
 
   const formatTime = (seconds) => {
+    if (!seconds || isNaN(seconds)) return '0:00';
     const min = Math.floor(seconds / 60);
     const sec = Math.floor(seconds % 60);
     return `${min}:${sec < 10 ? '0' : ''}${sec}`;
@@ -28,25 +49,21 @@ const PlayerBar = () => {
 
   return (
     <div className="player-bar">
-      {/* Hidden Player */}
-      <div style={{ display: 'none' }}>
-        {currentTrack.streamUrl && (
-          <ReactPlayer
-            ref={playerRef}
-            url={currentTrack.streamUrl}
-            playing={isPlaying}
-            volume={volume}
-            onProgress={(p) => setPlayed(p.playedSeconds)}
-            onDuration={(d) => setDuration(d)}
-            config={{
-              file: {
-                forceAudio: true,
-                attributes: { controlsList: 'nodownload' }
-              }
-            }}
-          />
-        )}
-      </div>
+      {currentTrack.streamUrl && (
+        <audio
+          ref={audioRef}
+          src={currentTrack.streamUrl}
+          onTimeUpdate={(e) => setPlayed(e.target.currentTime)}
+          onLoadedMetadata={(e) => setDuration(e.target.duration)}
+          onEnded={() => setIsPlaying(false)}
+          onError={(e) => {
+             console.error("Native Audio Error", e);
+             setIsPlaying(false);
+          }}
+          style={{ display: 'none' }}
+        />
+      )}
+
       <div style={{ display: 'flex', alignItems: 'center', width: '30%', gap: '16px' }}>
         <img 
           src={currentTrack.thumbnail} 
@@ -73,7 +90,9 @@ const PlayerBar = () => {
           <button className="btn"><SkipBack size={20} /></button>
           <button 
             className="btn" 
-            onClick={togglePlay}
+            onClick={() => {
+              togglePlay();
+            }}
             style={{ background: 'white', color: 'black', padding: '10px', borderRadius: '50%' }}
           >
             {isPlaying ? (
@@ -84,14 +103,13 @@ const PlayerBar = () => {
           </button>
           <button className="btn"><SkipForward size={20} /></button>
         </div>
-
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', width: '100%', maxWidth: '600px' }}>
           <span style={{ fontSize: '11px', color: 'var(--text-muted)', width: '40px' }}>{formatTime(played)}</span>
           <input 
             type="range" 
             min={0} 
-            max={duration} 
+            max={duration || currentTrack.duration} 
             step="any"
             value={played}
             onChange={handleSeek}
@@ -103,7 +121,7 @@ const PlayerBar = () => {
               cursor: 'pointer'
             }}
           />
-          <span style={{ fontSize: '11px', color: 'var(--text-muted)', width: '40px' }}>{formatTime(duration)}</span>
+          <span style={{ fontSize: '11px', color: 'var(--text-muted)', width: '40px' }}>{formatTime(duration || currentTrack.duration)}</span>
         </div>
       </div>
 
@@ -126,3 +144,4 @@ const PlayerBar = () => {
 };
 
 export default PlayerBar;
+
