@@ -1,8 +1,10 @@
 import React from 'react';
-import { Home, Search, Library, Heart, ListMusic, Music2 } from 'lucide-react';
+import { Home, Search, Library, LogOut, Music, Heart } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import { useAudio } from '../context/AudioContext';
 
-const Sidebar = ({ setView, activeView }) => {
+const Sidebar = ({ activeView, setView }) => {
+  const { user, logout } = useAuth();
   const { library } = useAudio();
 
   const menuItems = [
@@ -12,59 +14,95 @@ const Sidebar = ({ setView, activeView }) => {
   ];
 
   return (
-    <aside className="sidebar">
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-        <div style={{ 
-          background: 'var(--accent-primary)', 
-          padding: '8px', 
-          borderRadius: '12px',
-          boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)'
-        }}>
-          <Music2 size={24} color="white" />
-        </div>
-        <h2 style={{ fontFamily: 'Outfit', fontSize: '22px', letterSpacing: '-0.5px' }}>AesthetiCore</h2>
+    <div className="sidebar" style={{
+      width: '100%',
+      height: '100%',
+      background: 'var(--bg-sidebar)',
+      padding: '24px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '32px'
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '20px', fontWeight: 700 }}>
+        <Music className="text-accent" color="var(--accent-primary)" />
+        <span>AesthetiCore</span>
       </div>
 
-      <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1 }}>
         {menuItems.map((item) => (
           <button
             key={item.id}
             onClick={() => setView(item.id)}
-            className={`btn ${activeView === item.id ? 'active' : ''}`}
             style={{
-              justifyContent: 'flex-start',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
               padding: '12px 16px',
-              borderRadius: '10px',
-              gap: '16px',
-              background: activeView === item.id ? 'var(--bg-glass)' : 'transparent',
+              borderRadius: '8px',
+              background: activeView === item.id ? 'var(--bg-card)' : 'transparent',
               color: activeView === item.id ? 'var(--text-main)' : 'var(--text-muted)',
-              border: activeView === item.id ? '1px solid var(--border-glass)' : '1px solid transparent'
+              border: 'none',
+              cursor: 'pointer',
+              fontWeight: 500,
+              fontSize: '15px'
             }}
           >
             <item.icon size={20} />
-            <span style={{ fontWeight: 500 }}>{item.label}</span>
+            {item.label}
           </button>
         ))}
       </nav>
 
-      <div style={{ marginTop: 'auto', borderTop: '1px solid var(--border-glass)', paddingTop: '24px' }}>
-        <h3 style={{ fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '16px' }}>
-          Your Collection
-        </h3>
-        <button
-          onClick={() => setView('library')}
-          className="btn"
-          style={{
-            justifyContent: 'flex-start',
-            padding: '8px 0',
-            gap: '16px',
-          }}
-        >
-          <Heart size={20} />
-          <span>Liked Songs ({library.length})</span>
-        </button>
-      </div>
-    </aside>
+      {user && (
+        <div className="glass" style={{ 
+          padding: '16px', 
+          borderRadius: '16px', 
+          marginTop: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ 
+              width: '32px', 
+              height: '32px', 
+              borderRadius: '50%', 
+              background: 'var(--accent-primary)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '14px',
+              fontWeight: 600
+            }}>
+              {user.name?.[0].toUpperCase()}
+            </div>
+            <div style={{ overflow: 'hidden' }}>
+              <div style={{ fontSize: '14px', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {user.name}
+              </div>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Pro Member</div>
+            </div>
+          </div>
+          <button 
+            onClick={logout}
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px', 
+              color: '#f87171',
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '13px',
+              padding: '4px'
+            }}
+          >
+            <LogOut size={16} />
+            Sign Out
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 
