@@ -1,53 +1,43 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within AuthProvider');
+  }
+  return context;
+};
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem('aesthetic-user');
-    return savedUser ? JSON.parse(savedUser) : null;
-  });
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const login = (email, password) => {
-    // For portfolio: check against users in localStorage
-    const users = JSON.parse(localStorage.getItem('aesthetic-users') || '[]');
-    const foundUser = users.find(u => u.email === email && u.password === password);
-    
-    if (foundUser) {
-      const { password: _, ...userWithoutPass } = foundUser;
-      setUser(userWithoutPass);
-      localStorage.setItem('aesthetic-user', JSON.stringify(userWithoutPass));
-      return { success: true };
-    }
-    return { success: false, message: 'Invalid credentials' };
+  useEffect(() => {
+    // Mock auth check - replace with real auth later
+    const mockUser = { id: 1, name: 'Guest User' };
+    setTimeout(() => {
+      setUser(mockUser);
+      setLoading(false);
+    }, 1000);
+  }, []);
+
+  const login = (credentials) => {
+    // Mock login
+    setUser({ id: 1, name: credentials.email.split('@')[0] });
   };
-
-  const signup = (name, email, password) => {
-    const users = JSON.parse(localStorage.getItem('aesthetic-users') || '[]');
-    if (users.find(u => u.email === email)) {
-      return { success: false, message: 'User already exists' };
-    }
-    
-    const newUser = { name, email, password, joinedAt: new Date().toISOString() };
-    localStorage.setItem('aesthetic-users', JSON.stringify([...users, newUser]));
-    
-    const { password: _, ...userWithoutPass } = newUser;
-    setUser(userWithoutPass);
-    localStorage.setItem('aesthetic-user', JSON.stringify(userWithoutPass));
-    return { success: true };
-  };
-
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('aesthetic-user');
   };
 
+  if (loading) return <div className="loading">Loading...</div>;
+
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
