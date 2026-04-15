@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { searchMusic } from '../services/musicService';
 
 const AudioContext = createContext();
 
@@ -9,8 +8,18 @@ export const AudioProvider = ({ children }) => {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.7);
+  const [queue, setQueue] = useState([]);
+  const [originalQueue, setOriginalQueue] = useState([]);
+  const [isShuffled, setIsShuffled] = useState(false);
+  const [repeatMode, setRepeatMode] = useState('off'); // 'off' | 'all' | 'one'
+  
   const [library, setLibrary] = useState(() => {
     const saved = localStorage.getItem('music-library');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const [playlists, setPlaylists] = useState(() => {
+    const saved = localStorage.getItem('music-playlists');
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -18,9 +27,77 @@ export const AudioProvider = ({ children }) => {
     localStorage.setItem('music-library', JSON.stringify(library));
   }, [library]);
 
-  const playTrack = (track) => {
+  useEffect(() => {
+    localStorage.setItem('music-playlists', JSON.stringify(playlists));
+  }, [playlists]);
+
+  const toggleShuffle = () => {
+    if (!isShuffled) {
+      setOriginalQueue([...queue]);
+      const shuffled = [...queue].sort(() => Math.random() - 0.5);
+      // Ensure current track is still at the right place or handle it
+      setQueue(shuffled);
+    } else {
+      setQueue(originalQueue);
+    }
+    setIsShuffled(!isShuffled);
+  };
+
+  const toggleRepeat = () => {
+    const modes = ['off', 'all', 'one'];
+    const nextMode = modes[(modes.indexOf(repeatMode) + 1) % modes.length];
+    setRepeatMode(nextMode);
+  };
+
+  const playTrack = (track, newQueue = []) => {
     setCurrentTrack(track);
     setIsPlaying(true);
+    if (newQueue.length > 0) {
+      setQueue(newQueue);
+      setOriginalQueue(newQueue);
+      if (isShuffled) {
+        const shuffled = [...newQueue].sort(() => Math.random() - 0.5);
+        setQueue(shuffled);
+      }
+    } else if (!queue.find(t => t.id === track.id)) {
+      setQueue([track]);
+      setOriginalQueue([track]);
+    }
+  };
+
+  const playNext = () => {
+    if (!currentTrack || queue.length === 0) return;
+    
+    if (repeatMode === 'one') {
+      // Replay same track
+      const track = currentTrack;
+      setCurrentTrack(null); // Force reload
+      setTimeout(() => setCurrentTrack(track), 10);
+      return;
+    }
+
+    const currentIndex = queue.findIndex(t => t.id === currentTrack.id);
+    const nextIndex = currentIndex + 1;
+
+    if (nextIndex < queue.length) {
+      setCurrentTrack(queue[nextIndex]);
+    } else if (repeatMode === 'all') {
+      setCurrentTrack(queue[0]);
+    } else {
+      setIsPlaying(false);
+    }
+  };
+
+  const playPrevious = () => {
+    if (!currentTrack || queue.length === 0) return;
+    const currentIndex = queue.findIndex(t => t.id === currentTrack.id);
+    const prevIndex = currentIndex - 1;
+
+    if (prevIndex >= 0) {
+      setCurrentTrack(queue[prevIndex]);
+    } else if (repeatMode === 'all') {
+      setCurrentTrack(queue[queue.length - 1]);
+    }
   };
 
   const togglePlay = () => setIsPlaying(!isPlaying);
@@ -35,19 +112,51 @@ export const AudioProvider = ({ children }) => {
     setLibrary(library.filter(t => t.id !== trackId));
   };
 
+  const createPlaylist = (name = "New Playlist") => {
+    const newPlaylist = {
+      id: Date.now().toString(),
+      name,
+      tracks: [],
+      createdAt: new Date().toISOString()
+    };
+    setPlaylists([...playlists, newPlaylist]);
+    return newPlaylist;
+  };
+
+  const addToPlaylist = (playlistId, track) => {
+    setPlaylists(playlists.map(p => {
+      if (p.id === playlistId && !p.tracks.find(t => t.id === track.id)) {
+        return { ...p, tracks: [...p.tracks, track] };
+      }
+      return p;
+    }));
+  };
+
   const value = {
     currentTrack,
     isPlaying,
     volume,
     library,
+    queue,
+    isShuffled,
+    repeatMode,
+    playlists,
     playTrack,
+    playNext,
+    playPrevious,
     togglePlay,
+    toggleShuffle,
+    toggleRepeat,
     setVolume,
     setIsPlaying,
     addToLibrary,
-    removeFromLibrary
+    removeFromLibrary,
+    createPlaylist,
+    addToPlaylist
   };
 
   return <AudioContext.Provider value={value}>{children}</AudioContext.Provider>;
 };
+
+
 

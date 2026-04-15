@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Home from './components/Home';
 import Search from './components/Search';
@@ -11,9 +11,7 @@ import { useAuth } from './context/AuthContext';
 function App() {
   const [activeView, setActiveView] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { user, loading } = useAuth();
-  
-  if (loading) return null; // Show splash or nothing while checking localStorage
+  const { user } = useAuth();
 
   if (!user) {
     return <AuthModal />;
@@ -46,7 +44,10 @@ function App() {
       
       <main className="main-content">
         <div className="content-overflow-wrapper">
-          {renderView()}
+          {/* Key prop triggers re-animation on view change */}
+          <div key={activeView} className="animate-fade-in">
+            {renderView()}
+          </div>
         </div>
       </main>
 
@@ -64,4 +65,5 @@ function App() {
 }
 
 export default App;
+
 

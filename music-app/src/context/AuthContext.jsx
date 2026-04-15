@@ -1,21 +1,14 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Check for saved user on mount
+  const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem('aesthetic-user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-    setLoading(false);
-  }, []);
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
   const login = (email, password) => {
     // For portfolio: check against users in localStorage
@@ -23,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     const foundUser = users.find(u => u.email === email && u.password === password);
     
     if (foundUser) {
-      const { password, ...userWithoutPass } = foundUser;
+      const { password: _, ...userWithoutPass } = foundUser;
       setUser(userWithoutPass);
       localStorage.setItem('aesthetic-user', JSON.stringify(userWithoutPass));
       return { success: true };
@@ -40,11 +33,12 @@ export const AuthProvider = ({ children }) => {
     const newUser = { name, email, password, joinedAt: new Date().toISOString() };
     localStorage.setItem('aesthetic-users', JSON.stringify([...users, newUser]));
     
-    const { password: p, ...userWithoutPass } = newUser;
+    const { password: _, ...userWithoutPass } = newUser;
     setUser(userWithoutPass);
     localStorage.setItem('aesthetic-user', JSON.stringify(userWithoutPass));
     return { success: true };
   };
+
 
   const logout = () => {
     setUser(null);
@@ -52,7 +46,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, signup, logout }}>
       {children}
     </AuthContext.Provider>
   );
