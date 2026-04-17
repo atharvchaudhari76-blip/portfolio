@@ -18,6 +18,6 @@ if __name__ == '__main__':
     
     # Freeze the Flask app
     freezer.freeze()
-    print("✓ Portfolio build complete!")
+    print("Portfolio build complete!")
     print("  Build directory: build/")
     print("  Website frozen to static files")

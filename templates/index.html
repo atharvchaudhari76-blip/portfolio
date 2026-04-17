@@ -16,12 +16,9 @@ experiences.{% endblock %}
             <h1 class="hero-title animate-fade-up delay-1">
                 Hi, I'm <span class="gradient-text">Atharv Chaudhari.H.</span>
             </h1>
-            <p class="hero-subtitle animate-fade-up delay-2">
-                Creative Developer &amp; Designer
-            </p>
             <p class="hero-description animate-fade-up delay-3">
-                I craft beautiful, high-performance digital experiences that bring ideas to life.
-                Specializing in modern web development with a keen eye for design and user experience.
+                I build high-performance digital products where code meets creativity. 
+                I don't just develop; I engineer experiences that push the boundaries of the modern web.
             </p>
             <div class="hero-cta animate-fade-up delay-4">
                 <a href="#projects" class="btn btn-primary">
@@ -30,10 +27,6 @@ experiences.{% endblock %}
                 </a>
                 <a href="#contact" class="btn btn-outline">
                     <span>Get in Touch</span>
-                </a>
-                <a href="{{ url_for('static', filename='CV_Atharv_Chaudhari.pdf') }}" class="btn btn-outline" download>
-                    <span>Download CV</span>
-                    <i class="fas fa-download"></i>
                 </a>
             </div>
             <div class="hero-stats animate-fade-up delay-5">
@@ -56,25 +49,13 @@ experiences.{% endblock %}
             </div>
         </div>
         <div class="hero-visual animate-fade-up delay-2">
-            <div class="hero-card">
-                <div class="card-header">
-                    <div class="card-dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                    </div>
-                    <span class="card-title">portfolio.js</span>
-                </div>
-                <div class="card-body">
-                    <pre><code><span class="code-keyword">const</span> <span class="code-var">developer</span> = {
-  <span class="code-key">name</span>: <span class="code-string">"Atharv Chaudhari.H."</span>,
-  <span class="code-key">skills</span>: [<span class="code-string">"JavaScript"</span>, <span class="code-string">"Python"</span>, 
-           <span class="code-string">"React"</span>, <span class="code-string">"Flask"</span>],
-  <span class="code-key">passion</span>: <span class="code-string">"Building amazing UIs"</span>,
-  <span class="code-key">available</span>: <span class="code-bool">true</span>
-};
-
-<span class="code-keyword">export default</span> developer;</code></pre>
+            <div class="humanoid-container">
+                <div class="humanoid-glow"></div>
+                <img src="{{ url_for('static', filename='images/humanoid.png') }}" alt="Humanoid Creative Developer" class="humanoid-img">
+                <div class="floating-elements">
+                    <span class="float-item code">&lt;/&gt;</span>
+                    <span class="float-item music"><i class="fas fa-music"></i></span>
+                    <span class="float-item design"><i class="fas fa-palette"></i></span>
                 </div>
             </div>
         </div>
@@ -94,21 +75,15 @@ experiences.{% endblock %}
             <div class="about-image-wrapper">
                 <div class="about-image-card">
                     <div class="about-avatar">
-                        <div class="avatar-placeholder">
-                            <i class="fas fa-user-astronaut"></i>
-                        </div>
+                        <img src="{{ url_for('static', filename='images/humanoid.png') }}" alt="Atharv Chaudhari Avatar" class="avatar-img">
                     </div>
                     <div class="about-image-decoration"></div>
                 </div>
             </div>
             <div class="about-content">
-                <h2 class="about-heading">I'm a <span class="gradient-text">creative developer</span> who loves building
-                    things for the web</h2>
-                <p>I'm a passionate developer with a strong foundation in both frontend and backend technologies. I
-                    believe in writing clean, efficient code and creating user experiences that are both beautiful and
-                    functional.</p>
-                <p>When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects,
-                    or learning about the latest trends in design and development.</p>
+                <h2 class="about-heading">Blending <span class="gradient-text">human intuition</span> with digital precision</h2>
+                <p>I specialize in building immersive digital ecosystems that bridge the gap between complex engineering and human-centric design. My approach is rooted in the belief that code should be as expressive as the art it powers.</p>
+                <p>Whether I'm architecting scalable backends or crafting liquid-smooth transitions, my goal is always the same: to create something that feels alive, responsive, and unmistakably premium.</p>
                 <div class="about-details">
                     <div class="detail-item">
                         <i class="fas fa-user"></i>
@@ -318,10 +293,17 @@ experiences.{% endblock %}
                     class="count-badge"></span></h2>
             <p class="section-subtitle">A curated collection of my work</p>
         </div>
+        <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web Apps</button>
+            <button class="filter-btn" data-filter="ui">UI/UX</button>
+            <button class="filter-btn" data-filter="other">Other</button>
+        </div>
+
         <div class="projects-grid">
             <div class="project-card" data-category="web">
                 <div class="project-image"
-                    style="background: url('{{ url_for("static", filename="projects/music-hero.png") }}') center/cover no-repeat;">
+                    style="background: url('{{ url_for('static', filename='projects/music-hero.png') }}') center/cover no-repeat;">
                     <div class="project-overlay">
                         <div class="project-actions">
                             <a href="/portfolio/music/index.html" class="project-action-btn" aria-label="View Live"><i
@@ -337,6 +319,106 @@ experiences.{% endblock %}
                         UI.</p>
                     <div class="project-tech">
                         <span>React</span><span>YouTube API</span><span>Spotify UI</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web">
+                <div class="project-image" style="background: linear-gradient(135deg, #00f0ff 0%, #3a0ca3 100%);">
+                    <div class="project-overlay">
+                        <div class="project-actions">
+                            <a href="#" class="project-action-btn" aria-label="View Live"><i
+                                    class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-action-btn" aria-label="View Code"><i
+                                    class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>E-Commerce Platform</h3>
+                    <p>A full-stack e-commerce solution with real-time inventory management, payment processing.</p>
+                    <div class="project-tech">
+                        <span>React</span><span>Node.js</span><span>MongoDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web">
+                <div class="project-image" style="background: linear-gradient(135deg, #9d4edd 0%, #10002b 100%);">
+                    <div class="project-overlay">
+                        <div class="project-actions">
+                            <a href="#" class="project-action-btn" aria-label="View Live"><i
+                                    class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-action-btn" aria-label="View Code"><i
+                                    class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Analytics Dashboard</h3>
+                    <p>Real-time data visualization dashboard with interactive charts, filtering, and exports.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>D3.js</span><span>Flask</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="ui">
+                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <div class="project-overlay">
+                        <div class="project-actions">
+                            <a href="#" class="project-action-btn" aria-label="View Live"><i
+                                    class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-action-btn" aria-label="View Code"><i
+                                    class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Weather App</h3>
+                    <p>Beautiful weather application with location-based forecasts, animated backgrounds.</p>
+                    <div class="project-tech">
+                        <span>JavaScript</span><span>OpenWeather</span><span>CSS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web">
+                <div class="project-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <div class="project-overlay">
+                        <div class="project-actions">
+                            <a href="#" class="project-action-btn" aria-label="View Live"><i
+                                    class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-action-btn" aria-label="View Code"><i
+                                    class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Task Management App</h3>
+                    <p>Collaborative task manager with drag-and-drop boards, real-time sync, and workspaces.</p>
+                    <div class="project-tech">
+                        <span>React</span><span>Firebase</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="other">
+                <div class="project-image" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                    <div class="project-overlay">
+                        <div class="project-actions">
+                            <a href="#" class="project-action-btn" aria-label="View Live"><i
+                                    class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-action-btn" aria-label="View Code"><i
+                                    class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>CLI Productivity Tool</h3>
+                    <p>A command-line tool for automating daily developer workflows including git, deployments.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>Click</span>
                     </div>
                 </div>
             </div>
