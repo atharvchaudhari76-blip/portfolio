@@ -18,7 +18,10 @@ const PlayerBar = () => {
     toggleShuffle,
     repeatMode,
     toggleRepeat,
-    setIsPlaying
+    setIsPlaying,
+    library,
+    addToLibrary,
+    removeFromLibrary
   } = useAudio();
 
   const [playedSeconds, setPlayedSeconds] = useState(0);
@@ -113,7 +116,22 @@ const PlayerBar = () => {
           <h4 className="player-track-title">{currentTrack.title}</h4>
           <p className="player-track-artist">{currentTrack.artist}</p>
         </div>
-        <button className="icon-btn heart-btn"><Heart size={18} /></button>
+        <button 
+          className="icon-btn heart-btn"
+          onClick={() => {
+            if (library.find(t => t.id === currentTrack.id)) {
+              removeFromLibrary(currentTrack.id);
+            } else {
+              addToLibrary(currentTrack);
+            }
+          }}
+        >
+          <Heart 
+            size={18} 
+            fill={library.find(t => t.id === currentTrack.id) ? "var(--accent-primary)" : "none"} 
+            color={library.find(t => t.id === currentTrack.id) ? "var(--accent-primary)" : "currentColor"}
+          />
+        </button>
       </div>
 
       {/* Middle Section: Controls & Progress */}

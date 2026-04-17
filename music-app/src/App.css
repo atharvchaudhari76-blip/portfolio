@@ -691,9 +691,6 @@
   .player-track-title {
     font-size: 13px;
   }
-  .heart-btn {
-    display: none;
-  }
 
   .player-center {
     max-width: unset;

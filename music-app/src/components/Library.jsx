@@ -1,43 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Plus, Play, MoreHorizontal } from 'lucide-react';
 import { useAudio } from '../context/AudioContext';
-import { getTrending } from '../services/musicService';
-
-const mockPlaylists = [
-  { id: 1, title: 'My Playlist #1', tracks: 12, color: '#1db954' },
-  { id: 2, title: 'Workout Beats', tracks: 28, color: '#ff4500' },
-  { id: 3, title: 'Chill Vibes', tracks: 45, color: '#1e90ff' },
-  { id: 4, title: 'Road Trip', tracks: 19, color: '#ffd700' },
-];
 
 const Library = () => {
-  const [likedTracks, setLikedTracks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const { playTrack } = useAudio();
-
-  useEffect(() => {
-    const fetchLikedTracks = async () => {
-      try {
-        const trending = await getTrending();
-        setLikedTracks(trending.slice(0, 5)); // Just take 5 as mock "Liked" tracks
-      } catch (error) {
-        console.error('Failed to fetch liked tracks:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchLikedTracks();
-  }, []);
+  const { library, playlists, createPlaylist, playTrack } = useAudio();
+  const [isCreating, setIsCreating] = useState(false);
 
   const handleCreatePlaylist = () => {
-    alert('Playlist created successfully!');
+    const name = window.prompt("Enter playlist name:", "My Playlist #" + (playlists.length + 1));
+    if (name) {
+      createPlaylist(name);
+    }
   };
 
-  const handlePlayPlaylist = () => {
-    if (likedTracks.length > 0) {
-      playTrack(likedTracks[0], likedTracks);
+  const handlePlayPlaylist = (tracks) => {
+    if (tracks && tracks.length > 0) {
+      playTrack(tracks[0], tracks);
     } else {
-      alert('Loading tracks... please wait.');
+      alert('This playlist is empty.');
     }
   };
 
@@ -56,37 +36,41 @@ const Library = () => {
       <section className="playlists-section">
         <h2>Playlists</h2>
         <div className="playlists-grid">
-          {mockPlaylists.map((playlist) => (
-            <div key={playlist.id} className="playlist-card library-playlist">
-              <div className="playlist-color" style={{ backgroundColor: playlist.color }}></div>
-              <div className="playlist-info">
-                <h3>{playlist.title}</h3>
-                <p>{playlist.tracks} tracks</p>
+          {playlists.length === 0 ? (
+            <p style={{ color: 'var(--text-subdued)' }}>You don't have any playlists yet.</p>
+          ) : (
+            playlists.map((playlist) => (
+              <div key={playlist.id} className="playlist-card library-playlist">
+                <div className="playlist-color" style={{ backgroundColor: 'var(--bg-highlight)' }}></div>
+                <div className="playlist-info">
+                  <h3>{playlist.name}</h3>
+                  <p>{playlist.tracks.length} tracks</p>
+                </div>
+                <button 
+                  className="btn" 
+                  style={{ position: 'absolute', bottom: '8px', right: '8px', background: 'var(--accent-primary)', borderRadius: '50%', color: '#000', opacity: playlist.tracks.length > 0 ? 1 : 0.5, padding: '12px' }}
+                  onClick={() => handlePlayPlaylist(playlist.tracks)}
+                >
+                  <Play size={24} className="playlist-play" />
+                </button>
               </div>
-              <button 
-                className="btn" 
-                style={{ position: 'absolute', bottom: '8px', right: '8px', background: 'var(--accent-primary)', borderRadius: '50%', color: '#000', opacity: 0, padding: '12px' }}
-                onClick={handlePlayPlaylist}
-              >
-                <Play size={24} className="playlist-play" />
-              </button>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </section>
 
       <section className="liked-songs">
         <h2>Liked Songs</h2>
         <div className="tracks-grid">
-          {isLoading ? (
-            <p>Loading your liked songs...</p>
+          {library.length === 0 ? (
+            <p style={{ color: 'var(--text-subdued)' }}>No liked songs yet. Tap the heart on a song to add it here!</p>
           ) : (
-            likedTracks.map((track) => (
+            library.map((track) => (
               <div 
                 key={track.id} 
                 className="track-item" 
                 style={{ cursor: 'pointer' }}
-                onClick={() => playTrack(track, likedTracks)}
+                onClick={() => playTrack(track, library)}
               >
                 <div className="track-play">
                   <Play size={20} />
