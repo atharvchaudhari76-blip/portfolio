@@ -1,7 +1,10 @@
 import React from 'react';
-import { Home, Search, Library, Plus, ArrowRight } from 'lucide-react';
+import { Home, Search, Library, Plus, ArrowRight, LogOut } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Sidebar = ({ setView, activeView }) => {
+  const { logout, user } = useAuth();
+
   return (
     <div className="sidebar">
       {/* Block 1: Navigation */}
@@ -52,6 +55,15 @@ const Sidebar = ({ setView, activeView }) => {
         </div>
 
         <div className="sidebar-footer">
+          <div className="user-profile">
+            <div className="user-info">
+              <span className="user-name">{user?.name || 'User'}</span>
+            </div>
+            <button className="logout-btn" onClick={logout} title="Logout">
+              <LogOut size={20} />
+              <span>Logout</span>
+            </button>
+          </div>
           <div className="footer-links">
             <a href="#">Legal</a>
             <a href="#">Safety & Privacy Center</a>
