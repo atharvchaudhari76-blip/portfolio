@@ -61,8 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // ----------------------------------------
-    // Stickers Interaction
+    // Stickers Interaction - DISABLED
     // ----------------------------------------
+    /*
     const stickers = ['⭐', '🔥', '🚀', '🎨', '💻', '✨'];
     document.addEventListener('click', (e) => {
         if (e.target.closest('button, a')) return; // Don't block real clicks
@@ -76,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         setTimeout(() => sticker.remove(), 1000);
     });
+    */
 
 
     // ----------------------------------------
@@ -354,17 +356,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ----------------------------------------
-    // Improved 3D Tilt effect
+    // Improved 3D Tilt effect - Expanded to all buttons/links
     // ----------------------------------------
-    document.querySelectorAll('[data-tilt], .avatar-container').forEach(card => {
+    document.querySelectorAll('[data-tilt], .avatar-container, .btn, .nav-link, .project-card, .service-card, .contact-method, .social-icon, .footer-links a').forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / centerY * -15;
-            const rotateY = (x - centerX) / centerX * 15;
+            
+            // Subtler tilt for buttons
+            const isButton = card.classList.contains('btn');
+            const maxRotate = isButton ? 8 : 15;
+            const rotateX = (y - centerY) / centerY * -maxRotate;
+            const rotateY = (x - centerX) / centerX * maxRotate;
             
             card.style.transition = 'none';
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
