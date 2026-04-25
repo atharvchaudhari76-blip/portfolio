@@ -58,8 +58,8 @@ const Home = () => {
 
   return (
     <div className="home-view animate-fade-in">
-      <header className="view-header">
-         <h1 className="view-title">{greeting}</h1>
+      <header className="view-header" style={{ marginBottom: '24px' }}>
+        <h1 className="view-title">{greeting}</h1>
       </header>
 
       {isLoading ? (

@@ -158,7 +158,6 @@
 
 .content-overflow-wrapper {
   padding: 24px 32px;
-  height: 100%;
 }
 
 /* Sections */
@@ -978,6 +977,17 @@
 }
 
 @media (max-width: 768px) {
+  .card-play-button {
+    opacity: 1;
+    transform: translateY(0);
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-overlay-actions {
+    opacity: 1;
+  }
+
   .playlists-grid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 12px;
@@ -1001,120 +1011,48 @@
     display: flex;
     align-items: center;
   }
+}
 
-  .control-btn {
-    padding: 10px;
-  }
-
-  .control-btn svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .app-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr var(--player-height) var(--bottom-nav-height);
-    padding: 0;
-    gap: 0;
-  }
-  
-  .sidebar-wrapper {
-    grid-row: 3 / 4;
-    grid-column: 1 / 2;
-    border-radius: 0;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .sidebar {
-    flex-direction: row !important;
-    justify-content: space-around;
-    height: 100%;
-    padding: 0;
-  }
-
-  .nav-section {
-    flex-direction: row !important;
-    width: 100%;
-    justify-content: space-around;
-    padding: 0;
-  }
-
-  /* Hide library and install banner in bottom nav for space */
-  .library-section, .install-banner {
-    display: none !important;
-  }
-
-  .nav-item { 
-    padding: 12px; 
-    flex-direction: column;
-    gap: 4px;
-    justify-content: center; 
-    font-size: 10px;
-    flex: 1;
-  }
-  .nav-item span { 
-    display: block !important; 
-    font-size: 10px;
-    font-weight: 500;
-  }
-  .nav-item svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* Player Mobile Fixes */
-  .player-wrapper {
-    padding: 0 8px;
-  }
-  .player-bar {
-    gap: 4px;
-  }
-  .player-left {
-    min-width: unset;
-    width: 40%;
+/* ===== EXTRA SMALL PHONES (≤ 375px) ===== */
+@media (max-width: 375px) {
+  .song-grid {
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
   }
-  .player-art-container {
-    width: 40px;
-    height: 40px;
-  }
-  .player-track-title {
-    font-size: 13px;
+
+  .content-overflow-wrapper {
+    padding: 10px 10px 16px;
   }
 
-  .player-center {
-    max-width: unset;
-    width: 60%;
-    flex: 1;
+  .view-title {
+    font-size: 22px;
   }
 
-  .player-right {
-    display: none; /* Hide volume controls on mobile */
+  .card-title {
+    font-size: 12px;
   }
 
-  .control-btn[title="Shuffle"], 
-  .control-btn[title="Repeat"] {
-    display: none; /* Hide shuffle/repeat on small screens to save space */
-  }
-
-  .play-btn-circle {
-    width: 28px;
-    height: 28px;
-  }
-  .play-btn-circle svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .time-text {
-    min-width: 30px;
+  .card-artist {
     font-size: 10px;
   }
 
-  .song-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
+  .browse-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .player-track-title {
+    font-size: 12px;
+  }
+
+  .player-track-artist {
+    font-size: 10px;
+  }
+
+  /* 2 columns for library too */
+  .library-content-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 }
+
