@@ -41,7 +41,7 @@ const Sidebar = ({ setView, activeView }) => {
     }
   };
 
-  const showInstallButton = (deferredPrompt || (isIOS && !isStandalone));
+  const showInstallButton = (deferredPrompt || isIOS || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 
   return (
     <div className="sidebar">

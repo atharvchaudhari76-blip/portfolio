@@ -19,8 +19,7 @@ export default defineConfig({
         theme_color: '#000000',
         background_color: '#000000',
         display: 'standalone',
-        start_url: '/portfolio/music/index.html',
-        scope: '/portfolio/music/',
+        start_url: 'index.html',
         icons: [
           {
             src: 'https://cdn-icons-png.flaticon.com/512/3043/3043665.png',
@@ -36,5 +35,5 @@ export default defineConfig({
       }
     })
   ],
-  base: '/portfolio/music/',
+  base: './',
 })
