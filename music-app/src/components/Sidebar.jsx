@@ -50,7 +50,7 @@ const Sidebar = ({ setView, activeView }) => {
         </button>
         {deferredPrompt && (
           <button
-            className="nav-item"
+            className="nav-item mobile-only-btn"
             onClick={handleInstallClick}
             style={{ color: 'var(--accent-primary)' }}
           >

@@ -1918,3 +1918,14 @@ a.contact-method-value:hover {
         font-size: 0.8rem;
     }
 }
+
+/* Mobile only styling */
+.mobile-only-btn {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .mobile-only-btn {
+        display: inline-flex !important;
+    }
+}
