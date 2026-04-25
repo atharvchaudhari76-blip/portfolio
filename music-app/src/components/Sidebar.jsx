@@ -49,14 +49,24 @@ const Sidebar = ({ setView, activeView }) => {
           <span>Search</span>
         </button>
         {deferredPrompt && (
-          <button
-            className="nav-item mobile-only-btn"
-            onClick={handleInstallClick}
-            style={{ color: 'var(--accent-primary)' }}
-          >
-            <Download size={24} />
-            <span>Install App</span>
-          </button>
+          <div className="install-banner" style={{ padding: '8px 16px', marginTop: '8px' }}>
+            <button
+              className="pill-btn"
+              onClick={handleInstallClick}
+              style={{ 
+                width: '100%', 
+                background: 'var(--accent-primary)', 
+                color: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px'
+              }}
+            >
+              <Download size={18} />
+              <span>Install App</span>
+            </button>
+          </div>
         )}
       </div>
 

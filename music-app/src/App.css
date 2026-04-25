@@ -1074,14 +1074,3 @@
     gap: 12px;
   }
 }
-
-/* Mobile only styling */
-.mobile-only-btn {
-  display: none !important;
-}
-
-@media (max-width: 768px) {
-  .mobile-only-btn {
-      display: flex !important;
-  }
-}

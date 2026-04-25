@@ -1919,13 +1919,14 @@ a.contact-method-value:hover {
     }
 }
 
-/* Mobile only styling */
-.mobile-only-btn {
-    display: none !important;
+/* Install App button styling */
+.project-action-btn.install-btn {
+    background: var(--accent-primary) !important;
+    color: white !important;
+    border: none !important;
 }
 
-@media (max-width: 768px) {
-    .mobile-only-btn {
-        display: inline-flex !important;
-    }
+.project-action-btn.install-btn:hover {
+    background: var(--accent-secondary) !important;
+    transform: scale(1.1);
 }
