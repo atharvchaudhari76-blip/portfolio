@@ -193,25 +193,64 @@ html, body, #root {
 }
 
 /* ===== BOTTOM NAV (mobile) ===== */
-.bottom-nav { display: none; }
+.bottom-nav { 
+  display: none; 
+}
 
 .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  gap: 6px;
   color: var(--text-muted);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
-  padding: 8px;
+  padding: 12px 8px;
   flex: 1;
   border: none;
   background: transparent;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
   font-family: inherit;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  position: relative;
+  min-height: 48px;
 }
-.nav-item.active { color: white; }
+
+.nav-item .nav-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.nav-label {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.nav-item:active {
+  transform: scale(0.95);
+}
+
+.nav-item.active { 
+  color: white;
+}
+
+.nav-item:hover {
+  color: #ffffff;
+}
+
+@supports (padding-bottom: max(0px)) {
+  .nav-item {
+    padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
+  }
+}
 
 /* ===== HIDDEN ON MOBILE ===== */
 .hide-mobile {}
@@ -341,12 +380,55 @@ input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     background: rgba(8, 8, 12, 0.98);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid var(--border-subtle);
     padding: 0 8px;
     padding-bottom: env(safe-area-inset-bottom, 0px);
     justify-content: space-around;
     align-items: center;
     z-index: 1000;
+    gap: 4px;
+  }
+
+  .nav-item {
+    min-width: 44px;
+    min-height: 60px;
+    padding: 8px 6px;
+    gap: 4px;
+    font-size: 11px;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .nav-item:active {
+    transform: scale(0.92);
+  }
+
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 3px;
+    background: var(--accent-primary);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .nav-item.active::after {
+    opacity: 1;
+  }
+
+  .nav-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .menu-item {
+    position: relative;
   }
 
   .hide-mobile { display: none !important; }
