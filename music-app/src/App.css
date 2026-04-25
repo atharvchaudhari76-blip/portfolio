@@ -1014,11 +1014,55 @@
   .app-container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr var(--player-height) var(--bottom-nav-height);
+    padding: 0;
+    gap: 0;
   }
   
-  /* Hide text completely on very small screens */
-  .nav-item { padding: 12px; justify-content: center; }
-  .nav-item span { display: none; }
+  .sidebar-wrapper {
+    grid-row: 3 / 4;
+    grid-column: 1 / 2;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .sidebar {
+    flex-direction: row !important;
+    justify-content: space-around;
+    height: 100%;
+    padding: 0;
+  }
+
+  .nav-section {
+    flex-direction: row !important;
+    width: 100%;
+    justify-content: space-around;
+    padding: 0;
+  }
+
+  /* Hide library and install banner in bottom nav for space */
+  .library-section, .install-banner {
+    display: none !important;
+  }
+
+  .nav-item { 
+    padding: 12px; 
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center; 
+    font-size: 10px;
+    flex: 1;
+  }
+  .nav-item span { 
+    display: block !important; 
+    font-size: 10px;
+    font-weight: 500;
+  }
+  .nav-item svg {
+    width: 20px;
+    height: 20px;
+  }
 
   /* Player Mobile Fixes */
   .player-wrapper {
