@@ -6,6 +6,7 @@ const Sidebar = ({ setView, activeView }) => {
   const { logout, user } = useAuth();
   const [isIOS, setIsIOS] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
