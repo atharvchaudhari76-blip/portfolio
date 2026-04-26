@@ -186,29 +186,95 @@ export const downloadSong = async (song) => {
     alert("This song is not available for download.");
     return;
   }
+  
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  // Show a toast notification since fetch can take a few seconds
+  const toast = document.createElement('div');
+  toast.innerText = `Preparing download for "${song.title}"...`;
+  toast.style.position = 'fixed';
+  toast.style.bottom = '120px';
+  toast.style.left = '50%';
+  toast.style.transform = 'translateX(-50%)';
+  toast.style.background = 'var(--accent-primary, #1ed760)';
+  toast.style.color = '#000';
+  toast.style.padding = '12px 24px';
+  toast.style.borderRadius = '50px';
+  toast.style.zIndex = '9999';
+  toast.style.fontWeight = 'bold';
+  toast.style.fontSize = '14px';
+  toast.style.boxShadow = '0 8px 24px rgba(0,0,0,0.5)';
+  toast.style.transition = 'opacity 0.3s ease';
+  document.body.appendChild(toast);
+
+  // For mobile, open a tab SYNCHRONOUSLY before the async fetch
+  let mobileTab = null;
+  if (isMobile) {
+    mobileTab = window.open('', '_blank');
+    if (mobileTab) {
+      mobileTab.document.write(`
+        <html>
+          <head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+          <body style="background:#121212;color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;margin:0;">
+            <h3 style="color:#1ed760;margin-bottom:10px;">Downloading</h3>
+            <p style="text-align:center;padding:0 20px;">${song.title}</p>
+            <p style="font-size:12px;color:#aaa;text-align:center;">You can close this tab once the download starts.</p>
+          </body>
+        </html>
+      `);
+    }
+  }
+
   try {
     const response = await fetch(song.streamUrl);
     if (!response.ok) throw new Error("Network response was not ok");
-    const blob = await response.blob();
+    
+    // Force application/octet-stream to trigger a download prompt on mobile
+    const originalBlob = await response.blob();
+    const blob = new Blob([originalBlob], { type: 'application/octet-stream' });
+    
     const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    // JioSaavn usually returns AAC audio
-    a.download = `${song.title} - ${song.artist}.aac`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
+    
+    if (isMobile && mobileTab) {
+      // Redirect the synchronously opened tab to the blob URL
+      mobileTab.location.href = url;
+      // Note: We don't automatically close the tab on mobile because iOS needs it open to show the download prompt
+    } else {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${song.title} - ${song.artist}.m4a`; // m4a is better handled by iOS
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => window.URL.revokeObjectURL(url), 2000);
+    }
+    
+    toast.innerText = "Download starting!";
+    toast.style.background = '#28a745'; // Green success color
+    toast.style.color = '#fff';
+    
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => {
+        if (document.body.contains(toast)) document.body.removeChild(toast);
+      }, 300);
+    }, 2500);
+
   } catch (err) {
     console.error("Direct download failed, attempting fallback:", err);
-    // Fallback: open in new tab
-    const a = document.createElement('a');
-    a.href = song.streamUrl;
-    a.target = '_blank';
-    a.download = `${song.title} - ${song.artist}.aac`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    toast.innerText = "Opening file directly...";
+    
+    setTimeout(() => { 
+      if (document.body.contains(toast)) document.body.removeChild(toast); 
+    }, 2000);
+    
+    // Fallback: On mobile, async window.open is blocked by popup blockers.
+    if (isMobile && mobileTab) {
+      mobileTab.location.href = song.streamUrl;
+    } else {
+      window.location.href = song.streamUrl;
+    }
   }
 };
 
