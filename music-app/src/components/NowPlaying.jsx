@@ -16,6 +16,7 @@ const NowPlaying = ({ goBack }) => {
     isShuffled,
     toggleShuffle,
     repeatMode,
+    toggleRepeat,
     library,
     addToLibrary,
     removeFromLibrary,
