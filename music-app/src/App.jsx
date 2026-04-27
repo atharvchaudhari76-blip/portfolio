@@ -11,8 +11,16 @@ import { useAuth } from './context/AuthContext';
 
 function App() {
   const [activeView, setActiveView] = useState('home');
+  const [prevView, setPrevView] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { user } = useAuth();
+
+  const handleSetView = (view) => {
+    if (view !== activeView) {
+      setPrevView(activeView);
+      setActiveView(view);
+    }
+  };
 
   if (!user) {
     return <AuthModal />;
@@ -22,8 +30,8 @@ function App() {
     switch (activeView) {
       case 'home': return <Home />;
       case 'search': return <Search />;
-      case 'library': return <Library setView={setActiveView} />;
-      case 'nowplaying': return <NowPlaying goBack={() => setActiveView('home')} />;
+      case 'library': return <Library setView={handleSetView} />;
+      case 'nowplaying': return <NowPlaying goBack={() => handleSetView(prevView)} />;
       default: return <Home />;
     }
   };
@@ -41,7 +49,7 @@ function App() {
       <div className={`sidebar-wrapper ${isSidebarOpen ? 'active' : ''}`}>
         <Sidebar 
           setView={(view) => {
-            setActiveView(view);
+            handleSetView(view);
             setIsSidebarOpen(false);
           }} 
           activeView={activeView} 
@@ -58,12 +66,12 @@ function App() {
 
       {/* Always render player-wrapper to maintain grid, but hide its content in NP mode */}
       <div className="player-wrapper" style={isNowPlaying ? { display: 'none' } : {}}>
-        <PlayerBar onOpenNowPlaying={() => setActiveView('nowplaying')} />
+        <PlayerBar onOpenNowPlaying={() => handleSetView('nowplaying')} />
       </div>
 
       <BottomNav 
         activeView={activeView} 
-        setView={setActiveView} 
+        setView={handleSetView} 
         toggleSidebar={toggleSidebar} 
       />
     </div>

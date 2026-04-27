@@ -143,7 +143,8 @@ const PlayerBar = ({ onOpenNowPlaying }) => {
         </div>
         <button 
           className="icon-btn heart-btn"
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent opening Now Playing
             if (library.find(t => t.id === currentTrack.id)) {
               removeFromLibrary(currentTrack.id);
             } else {
@@ -294,6 +295,13 @@ const PlayerBar = ({ onOpenNowPlaying }) => {
           onClick={() => downloadSong(currentTrack)}
         >
           <Download size={16} />
+        </button>
+        <button 
+          className="utility-btn" 
+          title="Open Now Playing"
+          onClick={onOpenNowPlaying}
+        >
+          <Disc size={18} />
         </button>
         <button className="utility-btn"><Mic2 size={16} /></button>
         <button className="utility-btn"><ListMusic size={16} /></button>
