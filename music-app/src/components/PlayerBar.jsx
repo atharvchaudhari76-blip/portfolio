@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   SkipBack, Play, Pause, SkipForward, Volume2, 
-  VolumeX, Shuffle, Repeat, Music, Heart, Mic2, ListMusic, MonitorSpeaker, Download
+  VolumeX, Shuffle, Repeat, Music, Heart, Mic2, ListMusic, MonitorSpeaker, Download, Plus
 } from 'lucide-react';
 import { useAudio } from '../context/AudioContext';
 import { downloadSong } from '../services/musicService';
@@ -22,9 +22,13 @@ const PlayerBar = ({ onOpenNowPlaying }) => {
     setIsPlaying,
     library,
     addToLibrary,
-    removeFromLibrary
+    removeFromLibrary,
+    playlists,
+    addToPlaylist,
+    createPlaylist
   } = useAudio();
   
+  const [showPlaylists, setShowPlaylists] = useState(false);
   const playNextRef = useRef(playNext);
   const playPreviousRef = useRef(playPrevious);
   const togglePlayRef = useRef(togglePlay);
@@ -221,7 +225,69 @@ const PlayerBar = ({ onOpenNowPlaying }) => {
       </div>
 
       {/* Right Section: Utilities */}
-      <div className="player-right">
+      <div className="player-right" style={{ position: 'relative' }}>
+        <button 
+          className="utility-btn" 
+          title="Add to Playlist"
+          onClick={() => setShowPlaylists(!showPlaylists)}
+        >
+          <Plus size={18} strokeWidth={2.5} />
+        </button>
+        {showPlaylists && (
+          <div 
+            className="playlist-dropdown animate-fade-in" 
+            onClick={(e) => e.stopPropagation()}
+            style={{ 
+              position: 'absolute', 
+              right: 0, 
+              bottom: '100%', 
+              marginBottom: '10px',
+              zIndex: 100, 
+              background: 'rgba(20, 20, 20, 0.95)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              padding: '10px',
+              minWidth: '180px',
+              boxShadow: '0 -10px 30px rgba(0,0,0,0.5)'
+            }}
+          >
+            <div className="dropdown-header" style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '8px', paddingBottom: '8px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+              Add to playlist
+            </div>
+            <div className="dropdown-content">
+              <button 
+                className="dropdown-item create" 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const name = window.prompt("Playlist name:");
+                  if (name) {
+                    const newPlaylist = createPlaylist(name);
+                    addToPlaylist(newPlaylist.id, currentTrack);
+                  }
+                  setShowPlaylists(false);
+                }}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', background: 'transparent', border: 'none', color: 'white', padding: '8px', borderRadius: '4px', cursor: 'pointer', textAlign: 'left' }}
+              >
+                <Plus size={14} /> New Playlist
+              </button>
+              {playlists.map(p => (
+                <button 
+                  key={p.id} 
+                  className="dropdown-item" 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addToPlaylist(p.id, currentTrack);
+                    setShowPlaylists(false);
+                  }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', background: 'transparent', border: 'none', color: 'var(--text-secondary)', padding: '8px', borderRadius: '4px', cursor: 'pointer', textAlign: 'left' }}
+                >
+                  {p.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         <button 
           className="utility-btn" 
           title="Download" 

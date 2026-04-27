@@ -101,7 +101,7 @@ const TrackRow = ({ track, index, queueContext, showIndex = true }) => {
           onClick={handleDropdownToggle}
           style={{ background: 'transparent', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', marginLeft: '10px' }}
         >
-          <MoreVertical size={20} className="action-icon" />
+          <Plus size={20} className="action-icon" />
         </button>
 
         {showDropdown && (
