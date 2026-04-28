@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { 
   SkipBack, Play, Pause, SkipForward, 
   Shuffle, Repeat, Heart, ChevronDown, 
-  Share2, ListMusic, Music, Plus
+  Share2, ListMusic, Music, Plus, Download
 } from 'lucide-react';
 import { useAudio } from '../context/AudioContext';
+import { downloadSong } from '../services/musicService';
 
 const NowPlaying = ({ goBack }) => {
   const { 
@@ -237,6 +238,9 @@ const NowPlaying = ({ goBack }) => {
             </div>
           </div>
         )}
+        <button className="np-action-btn" onClick={() => downloadSong(currentTrack)} title="Download">
+          <Download size={22} />
+        </button>
         <button className="np-action-btn">
           <ListMusic size={22} />
         </button>

@@ -43,16 +43,19 @@ const Sidebar = ({ setView, activeView }) => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
       deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        }
         setDeferredPrompt(null);
       });
     } else if (isIOS) {
-      alert("To install AesthetiCore on your iPhone:\n\n1. Tap the 'Share' button at the bottom of Safari.\n2. Tap 'Add to Home Screen'.");
+      alert("📱 To install AesthetiCore on your iPhone:\n\n1. Tap the 'Share' icon (square with up arrow) at the bottom.\n2. Scroll down and tap 'Add to Home Screen'.\n3. Tap 'Add' in the top right.");
     } else {
-      alert("To install AesthetiCore:\n\n1. Tap the three dots (menu) in your browser.\n2. Tap 'Install App' or 'Add to Home Screen'.\n\nIf you don't see it, wait 5 seconds for the app to finish loading and try again!");
+      alert("📱 To install AesthetiCore:\n\n1. Tap the menu icon (three dots) in your browser.\n2. Tap 'Install App' or 'Add to Home Screen'.\n\nThis will add a shortcut to your home screen for a full-screen experience!");
     }
   };
 
-  const showInstallButton = (deferredPrompt || isIOS || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+  const showInstallButton = (deferredPrompt || isIOS || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) && !isStandalone;
 
   return (
     <div className="sidebar">

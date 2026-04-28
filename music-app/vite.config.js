@@ -23,19 +23,19 @@ export default defineConfig({
         scope: '/portfolio/music/',
         icons: [
           {
-            src: 'https://cdn-icons-png.flaticon.com/512/3043/3043665.png',
+            src: 'logo.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any'
           },
           {
-            src: 'https://cdn-icons-png.flaticon.com/512/3043/3043665.png',
+            src: 'logo.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any'
           },
           {
-            src: 'https://cdn-icons-png.flaticon.com/512/3043/3043665.png',
+            src: 'logo.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'maskable'
