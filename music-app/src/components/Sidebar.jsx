@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Home, Search, Library, Plus, ArrowRight, LogOut, Download, Disc } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useAudio } from '../context/AudioContext';
+import logo from '../assets/logo.png';
 
 const Sidebar = ({ setView, activeView }) => {
   const { logout, user } = useAuth();
@@ -55,6 +56,10 @@ const Sidebar = ({ setView, activeView }) => {
 
   return (
     <div className="sidebar">
+      <div className="sidebar-logo" onClick={() => setView('home')} style={{ cursor: 'pointer' }}>
+        <img src={logo} alt="AesthetiCore Logo" />
+        <span>AesthetiCore</span>
+      </div>
       {/* Block 1: Navigation */}
       <div className="sidebar-section nav-section">
         <button

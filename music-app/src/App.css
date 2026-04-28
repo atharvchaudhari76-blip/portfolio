@@ -1,4 +1,26 @@
 /* Sidebar Styling */
+.sidebar-logo {
+  padding: 16px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.sidebar-logo img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.sidebar-logo span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-bright);
+  letter-spacing: -0.5px;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;

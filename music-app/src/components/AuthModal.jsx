@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { LogIn, UserPlus, Lock, User } from 'lucide-react';
 
+import logo from '../assets/logo.png';
+
 const AuthModal = () => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +35,7 @@ const AuthModal = () => {
       <div className="auth-modal animate-fade-in">
         <div className="auth-header">
           <div className="auth-logo">
-            <LogIn size={32} />
+            <img src={logo} alt="AesthetiCore" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <h2>{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
           <p>{isLogin ? 'Login to continue to AesthetiCore Music' : 'Start your musical journey today'}</p>

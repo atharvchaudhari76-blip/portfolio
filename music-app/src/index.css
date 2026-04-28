@@ -761,15 +761,12 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 .auth-logo {
-  width: 64px;
-  height: 64px;
-  background: var(--accent-primary);
-  color: black;
-  border-radius: 50%;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
+  margin: 0 auto 24px;
 }
 
 .auth-header h2 {
